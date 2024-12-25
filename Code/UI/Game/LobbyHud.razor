@@ -1,0 +1,35 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+        @if (PlayerCount < 2)
+        {
+            <div class="LobbyInfo">Not enough players to start a round</div>
+        }
+        else
+        {
+            <div class="LobbyInfo">@LobbyTimerText</div>
+        }
+
+</root>
+
+@code
+{
+    private List<Player> PlayerList { get; set; } = new List<Player>();
+    private int PlayerCount => PlayerList.Count;
+    private string LobbyTimerText = "0";
+
+    public override void Tick()
+    {
+        base.Tick();
+        PlayerList = Game.ActiveScene.GetAll<Player>().ToList<Player>();
+        var lobbyController = Game.ActiveScene.GetAll<LobbyController>().FirstOrDefault();
+        LobbyTimerText = $"{Math.Max(0, (int)lobbyController.LobbyTimer)} seconds";
+    }
+    
+    protected override int BuildHash() => System.HashCode.Combine(PlayerList, LobbyTimerText);
+}
+

@@ -1,0 +1,21 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+    <div class="crosshair" />
+    <div class="healthbars">
+        <div class="healthbar" )">
+            <div class="inner">
+                <div class="fill" style="width: @(Player.Local.Health / Player.Local.MaxHealth * 100f)%; height: @(Player.Local.Health / Player.Local.MaxHealth * 100f)%" />
+                <p>@Player.Local.Clues</p>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code
+{
+	protected override int BuildHash() => System.HashCode.Combine( Player.Local.Health, Player.Local.DisplayHotbar);
+}

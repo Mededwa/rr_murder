@@ -1,0 +1,18 @@
+LobbyHud
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	.LobbyInfo
+	{
+		position: absolute;
+		color: white;
+		left: 50%;
+		transform: translateX(-50%);
+		border-radius: 50%;
+		font-size: 8em;
+	}
+}

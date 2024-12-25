@@ -1,0 +1,29 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@namespace Sandbox
+
+<root>
+
+    @if ( !GameStarted){
+        <LobbyHud />
+    }
+    else {
+        <RoundHud />
+    }
+
+</root>
+
+@code
+{
+    public string ViewLobbyTimer;
+    public bool GameStarted;
+
+    public override void Tick(){
+        base.Tick();
+        ViewLobbyTimer = Game.ActiveScene.GetAll<LobbyController>().FirstOrDefault().LobbyTimer.ToString();
+    }
+
+    protected override int BuildHash() => System.HashCode.Combine(ViewLobbyTimer);
+
+}

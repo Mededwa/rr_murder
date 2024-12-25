@@ -1,0 +1,26 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+    @if (!Player.Local.IsValid()) return;
+
+    <PlayerVitals />
+
+    <GameHud />
+
+    <InventoryBar />
+
+</root>
+
+@code
+{
+
+    protected override int BuildHash()
+    {
+
+        return System.HashCode.Combine(Player.Local.IsValid());
+    }
+}
